@@ -1,0 +1,51 @@
+double median(vector<int> a, vector<int> b)
+{
+    int count=0;
+    // Write your code here.
+    int mid = a.size()+b.size();
+    int M = mid;
+    int ans = 0;
+        mid = mid/2;
+    
+    int i=0;
+    int j=0;
+    int ans1=0;
+    while(i<a.size() && j<b.size() && count <= mid)
+    {
+        ans1=ans;
+        if(a[i]<b[j])
+        {
+            ans = a[i];
+            i++;
+        }
+            else
+            {
+                ans = b[j];
+                j++;
+            }
+        count++;
+    }
+    
+    while(i<a.size()  && count <= mid)
+    {
+        ans1=ans;
+        ans = a[i];
+        i++;
+        count++;
+    }
+        
+        
+    while( j<b.size() && count <= mid)
+    {
+        ans1=ans;
+        ans = b[j];
+           count++;
+            j++;
+    }
+    
+        if(M%2)
+        return (double)ans;
+        else
+        return (double)(ans+ans1)/2.0;    
+        
+}
