@@ -1,0 +1,44 @@
+#include <bits/stdc++.h> 
+void DFS(vector< vector< int > > m,int i,int j,int c)
+{
+    if(i < m.size() && j < m[0].size() && i>=0 &&j>=0)
+    {
+        if(c==-1)
+        {
+            m[i][j]=-1;
+        }
+        
+    }
+}
+
+void setZeros(vector<vector<int>> &matrix)
+{
+
+    for(int i=0;i<matrix.size();i++)
+    {
+        for(int j=0;j<matrix[0].size();j++)
+        {
+            if( matrix[i][j] ==  0)
+            {
+               for(int k=0;k<matrix.size();k++)
+               {
+                   if(matrix[k][j] != 0)
+                   matrix[k][j]=-1;
+                 //  matrix[i][k]=0;
+               }
+                
+               for(int k=0;k<matrix[0].size();k++)
+               {
+                   if(matrix[i][k] != 0)
+                   matrix[i][k]=-1;
+                 //  matrix[i][k]=0;
+               }
+            }
+        }
+    }
+    for(int i=0;i<matrix.size();i++)
+        for(int j=0;j<matrix[0].size();j++)
+             if(matrix[i][j]==-1)
+                 matrix[i][j]=0;
+  //  return matrix;
+}
