@@ -1,0 +1,63 @@
+/************************************************************
+   
+   Following is the TreeNode class structure
+   
+   class TreeNode<T>
+   { 
+   public:
+        T data; 
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+   
+        TreeNode(T data) 
+  		{ 
+            this -> data = data; 
+            left = NULL; 
+            right = NULL; 
+        }
+   };
+   
+   
+ ************************************************************/
+int search(int start,int end,int data,vector< int > inorder)
+{
+    for(int i = start;i<=end;i++)
+    {
+        if(data == inorder[i])
+            return i;
+    }
+    return -1;
+}
+
+TreeNode<int>* build(int start,int end,int *index,vector<int> &inorder,vector<int> &postorder)
+{
+    if(*index < 0 || start > end)
+        return NULL;
+    TreeNode< int >* n = new TreeNode< int >(postorder[*index]);
+    n->left = NULL;
+    n->right=NULL;
+    *index = *index -1;
+  /*  
+    if(*index < 0 )
+        return n;
+    */
+    if(start==end)
+        return n;
+    
+    int in  = search(start,end,n->data,inorder);
+    if(in==-1)
+        return n;
+    n->right = build(in+1 , end ,index,inorder,postorder);
+    n->left  = build( start , in-1 , index,inorder,postorder);
+    
+    return n;
+}
+
+
+TreeNode<int>* getTreeFromPostorderAndInorder(vector<int>& postOrder, vector<int>& inOrder) 
+{
+    int index=postOrder.size()-1;
+    TreeNode<int> *n = build(0,inOrder.size()-1,&index,inOrder,postOrder);
+        return n;
+	// Write your code here.
+}
